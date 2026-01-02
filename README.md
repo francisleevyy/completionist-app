@@ -11,6 +11,7 @@ Completionist is a video game tracking app that utilizes the Steam API in order 
 ## 🛠️ Prerequisites
 Before running this project, ensure you have the following:
 - Flutter SDK (v3.10 or later)
+- Dart SDK (v3.0 or later)
 - Dart Frog CLI
 - Docker Desktop
 - PostgreSQL Client (optional) - For database management
