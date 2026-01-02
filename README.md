@@ -9,11 +9,6 @@ Quiz #3: Project Blueprint & Documentation
 
 Completionist is a video game tracking app that utilizes the Steam API in order to track your games and your achievements in your Steam account. The app also has a built-in guide section that shows you various websites that have guides made by other gamers that you can search for and pick one you’d like. There’s also a built-in note-taking function that allows you to create notes for anything should you wish to do so, and they are saved locally on your phone, so you can access them at any time.
 
-## AI Usage Acknowledgement
-The parts of the program that was AI-assisted were the following:
-Middleware (e.g. Connecting Steam API to the program, and fetching the proper data)
-Guides Page (e.g. Redirecting the links to an in-app browser)
-Debugging
 
 ## 🛠️ Prerequisites
 Before running this project, ensure you have the following:
@@ -26,38 +21,54 @@ Before running this project, ensure you have the following:
 
 ## 🚀 Setup & Installation
 
-### 1. Start the Server
-First, you need to turn on the backend. Navigate to the `server` folder:
+### 0. Clone the repository
 ```bash
-cd server
+git clone https://github.com/francisleevyy/completionist-app.git
+cd completionist-app
+```
+
+### 0.5. Environment Variables
+The project uses specific database credentials. Ensure your Docker container matches these, or create a .env file in the 'server' folder if you plan to externalize them:
+```env
+# PostgreSQL Configuration
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=password
+POSTGRES_DB=completionist_db
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5433
+```
+
+### 1. Start the Server
+Open Docker Desktop, open your terminal, and navigate to the `server` folder:
+```bash
+cd .\server\
+docker compose up -d
+```
+
+This will start the PostgreSQL database with the configuration specified in docker-compose.yaml.
+**Note:** The server runs on `localhost:8080` by default.
+
+### 2. Server Setup
+Start the Dart Frog backend server on the same terminal:
+```bash
+dart pub get
 dart_frog dev
 ```
 
-**Note:** The server runs on `localhost:8080` by default.
-
-### 2. Configure the App
-Create a `.env` file in the root directory of your Flutter project:
-```env
-BASE_URL=http://10.0.2.2:8080
-```
-
-**Important Notes:**
-- For **Android Emulator**, use `http://10.0.2.2:8080`
-- For **iOS Simulator** or **physical devices**, use your computer's local IP (e.g., `http://192.168.1.100:8080`)
-- For **production**, replace with your actual server URL
-
-Make sure to load the `.env` file in your app configuration (e.g., using the `flutter_dotenv` package).
-
-### 3. Run the App
-Open a new terminal, navigate to the root folder, and run:
+### 3. Run the Flutter App
+Open a new terminal, navigate to the completionist_app folder, and run:
 ```bash
+cd ..
+cd .\completionist_app\
 flutter pub get
-flutter run
+flutter run -d chrome --web-port=3000
 ```
+**Note:** We set the web-port to 3000 so that the 'Remember Me' function would work.
 
 ## 📱 Features
-* **Track your Games**: Users can see their most played games and their owned games within the app on both their Profile page and the Library page.
-* **See your Achievements**: Track the achievements you’ve done and not yet done when you click on a game.
+* **Steam Profile**: Users can view their real-time Steam status, avatar, and top played games.
+* **Track your Games**: Users can see their owned and most played games on the Library Page. They can also search and sort the games by most played and alphabetically.
+* **See your Achievements**: Track the achievements you’ve done and not yet done when you click on a game in the library.
 * **Make Notes on Your Games**: Make notes to track things you need to do, strategies for the games you make, or anything else you feel like noting down.
 * **Feeling Lost? Try a Guide!**: If you’re feeling like you’re lost in a game you’re playing, try looking it up in the Guides page of the app and see the various guides for that game.
 
@@ -88,25 +99,62 @@ Here are the endpoints available on the Dart Frog server:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/todos` | Fetches all active tasks |
-| GET | `/todos/[id]` | Fetches a specific task by ID |
-| POST | `/todos` | Creates a new task (Requires JSON body) |
-| DELETE | `/todos/[id]` | Removes a task from the database |
+GET | / | Health Check. Verifies DB connection |
+POST | /steam/profile |	Fetches user summary (Name, Avatar, Status |
+POST | /steam/games	| Fetches the list of owned games |
+POST	| /steam/achievements	| Fetches achievements for a specific game |
+GET	| /notes	| Retrieves all notes for a Steam ID |
+POST	| /notes	| Creates a new completionist note |
+PUT	| /notes/[id]	| Updates note content or completion status |
+DELETE	| /notes/[id]	| Removes a note from the database |
 
 ## 📁 Project Structure
 ```
-quicktask/
-├── lib/
-│ ├── config/
-│ │ └── env_config.dart
-│ ├── screens/
-│ └── main.dart
-├── server/
-│ └── routes/
-├── screenshots/
-│ ├── home_screen.png
-│ ├── add_task.png
-│ └── task_complete.png
-├── .env
+completionist-app/
+├── completionist_app/         # Flutter Frontend
+│   ├── lib/
+│   │   ├── models/
+│   │   |   └── note.dart
+│   │   |   └── steam_achievement.dart
+│   │   |   └── steam_game.dart
+│   │   |   └── steam_profile.dart
+│   │   ├── screens/
+│   │   |   └── achievements_screen.dart
+│   │   |   └── guides_screen.dart
+│   │   |   └── library_screen.dart
+│   │   |   └── login_screen.dart
+│   │   |   └── main_screen.dart
+│   │   |   └── notes_screen.dart
+│   │   |   └── profile_screen.dart
+│   │   ├── services/
+│   │   |   └── api_service.dart
+│   │   ├── widgets/
+│   │   |   └── side_menu.dart
+│   │   └── main.dart
+│   ├── test/                  # Unit, Widget, and Integration tests
+│   └── pubspec.yaml
+│
+├── server/                    # Dart Frog Backend
+│   ├── lib/
+│   │   └── cors.dart
+│   │   └── database_client.dart
+│   ├── routes/
+│   │   ├── notes/
+│   │   |   └── [id].dart
+│   │   |   └── index.dart
+│   │   ├── steam/
+│   │   |   └── achievements.dart
+│   │   |   └── games.dart
+│   │   |   └── profile.dart
+│   │   └── index.dart
+│   ├── pubspec.yaml
+│   └── analysis_options.yaml
+├── screenshots/               # Documentation Images
 └── README.md
 ```
+
+## AI Usage Acknowledgement
+The parts of the program that was AI-assisted were the following:
+- Middleware (e.g. Connecting Steam API to the program, and fetching the proper data)
+- Guides Page (e.g. Redirecting the links to an in-app browser)
+- Debugging
