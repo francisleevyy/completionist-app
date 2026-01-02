@@ -62,15 +62,26 @@ flutter run
 * **Feeling Lost? Try a Guide!**: If you’re feeling like you’re lost in a game you’re playing, try looking it up in the Guides page of the app and see the various guides for that game.
 
 ## 📸 Screenshots
-Add your app screenshots to help users visualize your application:
+### Login Page
+![Alt Text](https://github.com/francisleevyy/completionist-app/blob/screenshots/completionist_app/screenshots/Login_Screen.png)
 
-**Screenshot Guidelines:**
-- **Local Reference**: `![Alt Text](screenshots/image.png)` - Store images in a `screenshots` folder in your repo
-- **GitHub URL**: `![Alt Text](https://github.com/username/repo/blob/main/path/image.png?raw=true)` - Use full GitHub URL with `?raw=true`
-- **External Hosting**: `![Alt Text](https://imgur.com/your-image.png)` - Upload to Imgur, Cloudinary, or similar services
+### Profile Page
+![Alt Text](https://github.com/francisleevyy/completionist-app/blob/screenshots/completionist_app/screenshots/Profile_Page.png)
 
-**Real Project Examples:**
-- [Slash Slash Game](https://github.com/VB-Guron/Slash-Slash/blob/master/README.md) - Comprehensive README with multiple screenshots and detailed formatting
+### Library Page
+![Alt Text](https://github.com/francisleevyy/completionist-app/blob/screenshots/completionist_app/screenshots/Library_Page.png)
+
+### Guides Page
+![Alt Text](https://github.com/francisleevyy/completionist-app/blob/screenshots/completionist_app/screenshots/Guides_Page.png)
+
+### Notes Page
+![Alt Text](https://github.com/francisleevyy/completionist-app/blob/screenshots/completionist_app/screenshots/Notes_Page.png)
+
+### Achievements Tracker
+![Alt Text](https://github.com/francisleevyy/completionist-app/blob/screenshots/completionist_app/screenshots/Achievements_Page.png)
+
+### Edit and Delete Notes
+![Alt Text](https://github.com/francisleevyy/completionist-app/blob/screenshots/completionist_app/screenshots/Edit_Notes.png)
 
 ## 🔗 API Reference
 Here are the endpoints available on the Dart Frog server:
@@ -99,10 +110,3 @@ quicktask/
 ├── .env
 └── README.md
 ```
-
-## 💡 Tips
-- Keep your screenshots up to date with your latest UI
-- Use consistent image dimensions for a professional look
-- Add descriptive alt text for accessibility
-- Consider using GIFs to demonstrate app functionality
-
