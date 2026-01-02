@@ -1,8 +1,6 @@
-AGASANG, Alejandro J.		3CSB					       January 01, 2026
-SAMSON, Francis Levy G.
+AGASANG, Alejandro J. | SAMSON, Francis Levy G. | 3CSB
 ICS26011
-APPLICATIONS DEVELOPMENT AND EMERGING TECHNOLOGIES 3
-(MOBILE PROGRAMMING)
+APPLICATIONS DEVELOPMENT AND EMERGING TECHNOLOGIES 3 (MOBILE PROGRAMMING)
 Quiz #3: Project Blueprint & Documentation
 
 # Completionist: The Ultimate Steam Companion
